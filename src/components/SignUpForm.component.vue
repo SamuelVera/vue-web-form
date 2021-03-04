@@ -1,12 +1,25 @@
 <template>
   <form>
     <label>Email:</label>
-    <input type="email" required />
+    <!--v-model directive is used for 2-way databinding-->
+    <!--v-model binds the given property of the data object to this input-->
+    <input type="email" required v-model="email" />
+    <label>Password:</label>
+    <input type="password" required v-model="password" />
   </form>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      /**User email */
+      email: "",
+      /**User password */
+      password: "",
+    };
+  },
+};
 </script>
 
 <style>
