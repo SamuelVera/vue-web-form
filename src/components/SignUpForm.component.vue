@@ -45,7 +45,12 @@
     <label>Skills:</label>
     <!--Listen for @keyup event with alt key pressed -->
     <input @keyup.alt="addSkill" type="text" v-model="tempSkill" />
-    <div class="pill" v-for="skill in skills" :key="skill">
+    <div
+      class="pill"
+      v-for="(skill, idx) in skills"
+      @click="deleteSkill(idx)"
+      :key="skill"
+    >
       {{ skill }}
     </div>
   </form>
@@ -85,6 +90,11 @@ export default {
         this.tempSkill = "";
       }
     },
+    /**Deletes a given skill based on the index */
+    deleteSkill(idx) {
+      //Filter the given index
+      this.skills = this.skills.filter((_, i) => i !== idx);
+    },
   },
 };
 </script>
@@ -123,5 +133,22 @@ input[type="checkbox"] {
   margin: 0 10px 0 0;
   position: relative;
   top: 2px;
+}
+.pill {
+  display: inline-block;
+  margin: 20px 10px 0 0;
+  padding: 6px 12px;
+  background: #eee;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
+  opacity: 1;
+  transition: 0.3s;
+}
+.pill:hover {
+  opacity: 0.7;
 }
 </style>
