@@ -1,5 +1,6 @@
 <template>
-  <form>
+  <!--Listen to the submit event of the form and use modifier prevent to prevent default behavior-->
+  <form @submit.prevent="onSubmit">
     <label>Email:</label>
     <!--v-model directive is used for 2-way databinding-->
     <!--v-model binds the given property of the data object to this input-->
@@ -7,6 +8,7 @@
 
     <label>Password:</label>
     <input type="password" required v-model="password" />
+    <p v-if="passwordError" class="error">{{ passwordError }}</p>
 
     <label>Role:</label>
     <!--v-model for a select-->
@@ -53,6 +55,11 @@
     >
       {{ skill }}
     </div>
+
+    <!--Submit button-->
+    <div class="submit">
+      <button type="submit">Create an account</button>
+    </div>
   </form>
 </template>
 
@@ -74,6 +81,9 @@ export default {
       skills: [],
       /**Temporal skill to add to the array */
       tempSkill: "",
+      //Errors
+      /**Password error */
+      passwordError: "",
     };
   },
   methods: {
@@ -94,6 +104,22 @@ export default {
     deleteSkill(idx) {
       //Filter the given index
       this.skills = this.skills.filter((_, i) => i !== idx);
+    },
+    /**Handle submit form */
+    onSubmit() {
+      //Validate password
+      this.passwordError =
+        this.password.length > 5
+          ? ""
+          : "Password must be at least 6 characters long";
+      if (!this.passwordError) {
+        //No error, do submit logic
+        console.log("Email:", this.email);
+        console.log("Password:", this.password);
+        console.log("Role:", this.role);
+        console.log("Skills:", this.skills);
+        console.log("Accepted terms:", this.terms);
+      }
     },
   },
 };
@@ -150,5 +176,28 @@ input[type="checkbox"] {
 }
 .pill:hover {
   opacity: 0.7;
+}
+button {
+  background: #0b6dff;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  opacity: 1;
+  transition: 0.3s;
+}
+button:hover {
+  opacity: 0.7;
+}
+.submit {
+  text-align: center;
+}
+p.error {
+  color: #ff0062;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 </style>
