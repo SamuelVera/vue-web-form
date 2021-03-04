@@ -40,6 +40,14 @@
         <label>.NET</label>
       </div>
     -->
+
+    <!--Keyboard events-->
+    <label>Skills:</label>
+    <!--Listen for @keyup event with alt key pressed -->
+    <input @keyup.alt="addSkill" type="text" v-model="tempSkill" />
+    <div class="pill" v-for="skill in skills" :key="skill">
+      {{ skill }}
+    </div>
   </form>
 </template>
 
@@ -57,7 +65,26 @@ export default {
       terms: false,
       /**User frameworks */
       //frameworks: [],
+      /**User skills */
+      skills: [],
+      /**Temporal skill to add to the array */
+      tempSkill: "",
     };
+  },
+  methods: {
+    /**Adds a skill to the array */
+    addSkill(e) {
+      if (this.tempSkill && e.key === ",") {
+        //Add skill only when user presses the comma and there's data
+        if (!this.skills.includes(this.tempSkill)) {
+          //Avoid duplicates
+          //Push to array
+          this.skills.push(this.tempSkill);
+        }
+        //Clear temporal
+        this.tempSkill = "";
+      }
+    },
   },
 };
 </script>
