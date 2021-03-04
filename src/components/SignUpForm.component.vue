@@ -4,8 +4,16 @@
     <!--v-model directive is used for 2-way databinding-->
     <!--v-model binds the given property of the data object to this input-->
     <input type="email" required v-model="email" />
+
     <label>Password:</label>
     <input type="password" required v-model="password" />
+
+    <label>Role:</label>
+    <!--v-model for a select-->
+    <select v-model="role">
+      <option value="developer">Web Developer</option>
+      <option value="designer">Web Designer</option>
+    </select>
   </form>
 </template>
 
@@ -17,6 +25,8 @@ export default {
       email: "",
       /**User password */
       password: "",
+      /**User role */
+      role: "",
     };
   },
 };
@@ -40,7 +50,8 @@ label {
   letter-spacing: 1px;
   font-weight: bold;
 }
-input {
+input,
+select {
   display: block;
   padding: 10px 6px;
   width: 100%;
