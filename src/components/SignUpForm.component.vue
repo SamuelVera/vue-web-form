@@ -14,6 +14,32 @@
       <option value="developer">Web Developer</option>
       <option value="designer">Web Designer</option>
     </select>
+
+    <div class="terms">
+      <!--v-model for checkbox-->
+      <input v-model="terms" type="checkbox" required />
+      <label>Accept terms and conditions</label>
+    </div>
+
+    <!--
+      Select from many and save the value into an array
+      <div>
+        <input type="checkbox" value="react" v-model="frameworks" />
+        <label>React</label>
+      </div>
+      <div>
+        <input type="checkbox" value="angularjs" v-model="frameworks" />
+        <label>Angular JS</label>
+      </div>
+      <div>
+        <input type="checkbox" value="vuejs3" v-model="frameworks" />
+        <label>Vue JS 3</label>
+      </div>
+      <div>
+        <input type="checkbox" value=".net" v-model="frameworks" />
+        <label>.NET</label>
+      </div>
+    -->
   </form>
 </template>
 
@@ -27,6 +53,10 @@ export default {
       password: "",
       /**User role */
       role: "",
+      /**Terms accepted or not */
+      terms: false,
+      /**User frameworks */
+      //frameworks: [],
     };
   },
 };
@@ -59,5 +89,12 @@ select {
   border: none;
   border-bottom: 1px solid #ddd;
   color: #555;
+}
+input[type="checkbox"] {
+  display: inline-block;
+  width: 16px;
+  margin: 0 10px 0 0;
+  position: relative;
+  top: 2px;
 }
 </style>
